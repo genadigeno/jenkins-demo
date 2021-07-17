@@ -4,7 +4,7 @@ pipeline {
     stage('greetings') {
       steps {
         echo 'Hello from github'
-        sh 'echo "Hello from github, this is DEMO: $DEMO"'
+        sh 'bat "Hello from github, this is DEMO: $DEMO"'
       }
     }
 
