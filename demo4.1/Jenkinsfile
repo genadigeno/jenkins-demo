@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                String versioning = getVersion();  
+                def versioning = getVersion();  
                 echo "Building versioning: ${versioning}"
               dir('./m3/src') {
                 bat '''
