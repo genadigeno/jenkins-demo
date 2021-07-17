@@ -21,7 +21,9 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                versioning = getVersion();  
+                script {
+                    versioning = getVersion();  
+                }
                 echo "Building versioning: ${versioning}"
               dir('./m3/src') {
                 bat '''
