@@ -6,9 +6,21 @@ pipeline {
    }
 
    stages {
-      stage('stage-1') {
+      stage('Build') {
          steps {
             echo "This is build number $BUILD_NUMBER of demo $DEMO"
+            
+         }
+      }
+      stage('Test') {
+         steps {
+            echo "This is Test number $BUILD_NUMBER of demo $DEMO"
+            
+         }
+      }
+      stage('Deploy') {
+         steps {
+            echo "This is Deploy number $BUILD_NUMBER of demo $DEMO"
             
          }
       }
