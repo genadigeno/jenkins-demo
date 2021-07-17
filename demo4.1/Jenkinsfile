@@ -4,21 +4,19 @@ pipeline {
         VERSION = "0.1.0"        
         VERSION_RC = "rc.2"
     }
+    parameters {
+        booleanParam(name: 'RC', defaultValue: false, description: 'Is RC?')
+    }
     stages {
         stage('Audit tools') {                        
             steps {
-                bat '''
-                  git version
-                  docker version
-                  dotnet --list-sdks
-                  dotnet --list-runtimes
-                '''
+                printCommand();
             }
         }
         stage('Build') {
             steps {
               echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
-              bat 'dotnet build -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./m3/src/Pi.Web/Pi.Web.csproj'
+              //bat 'dotnet build -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./m3/src/Pi.Web/Pi.Web.csproj'
             }
         }
         stage('Unit Test') {
@@ -38,4 +36,13 @@ pipeline {
             }
         }
     }
+}
+
+void printCommand(){
+    bat '''
+          git version
+          docker version
+          dotnet --list-sdks
+          dotnet --list-runtimes
+        '''
 }
