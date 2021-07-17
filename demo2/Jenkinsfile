@@ -3,24 +3,28 @@ pipeline {
    
    environment {
        DEMO='1.3'
+       MODE='production'
    }
 
    stages {
       stage('Build') {
          steps {
-            echo "This is build number $BUILD_NUMBER of demo $DEMO"
+            echo "This is build mode is $MODE of demo $DEMO"
             
          }
       }
       stage('Test') {
+         environment {
+             MODE='development'
+         }
          steps {
-            echo "This is Test number $BUILD_NUMBER of demo $DEMO"
+            echo "This is Test, mode is $MODE of demo $DEMO"
             
          }
       }
       stage('Deploy') {
          steps {
-            echo "This is Deploy number $BUILD_NUMBER of demo $DEMO"
+            echo "This is Deploy mode is $MODE of demo $DEMO"
             
          }
       }
