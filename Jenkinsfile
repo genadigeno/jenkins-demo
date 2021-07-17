@@ -4,6 +4,7 @@ pipeline {
     stage('greetings') {
       steps {
         echo 'Hello from github'
+        sh 'echo "Hello from github, thi is DEMO: $DEMO"'
       }
     }
 
