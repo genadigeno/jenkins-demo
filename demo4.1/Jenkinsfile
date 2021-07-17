@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Audit tools') {                        
             steps {
-                printCommand();
+                //printCommand();
             }
         }
         stage('Build') {
@@ -26,17 +26,17 @@ pipeline {
                 }
                 echo "Building versioning: ${versioning}"
               dir('./m3/src') {
-                bat '''
-                    dotnet test --logger "trx;LogFileName=Pi.Math.trx" Pi.Math.Tests/Pi.Math.Tests.csproj
-                    dotnet test --logger "trx;LogFileName=Pi.Runtime.trx" Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
-                '''
-                mstest testResultsFile:"**/*.trx", keepLongStdio: true
+                //bat '''
+                //    dotnet test --logger "trx;LogFileName=Pi.Math.trx" Pi.Math.Tests/Pi.Math.Tests.csproj
+                //    dotnet test --logger "trx;LogFileName=Pi.Runtime.trx" Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
+                //'''
+                //mstest testResultsFile:"**/*.trx", keepLongStdio: true
               }
             }
         }
         stage('Smoke Test') {
             steps {
-              bat 'dotnet ./m3/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll'
+              //bat 'dotnet ./m3/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll'
             }
         }
     }
