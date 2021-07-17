@@ -21,6 +21,8 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
+                var versioning = getVersion();  
+                echo "Building versioning: ${versioning}"
               dir('./m3/src') {
                 bat '''
                     dotnet test --logger "trx;LogFileName=Pi.Math.trx" Pi.Math.Tests/Pi.Math.Tests.csproj
@@ -35,6 +37,14 @@ pipeline {
               bat 'dotnet ./m3/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll'
             }
         }
+    }
+}
+
+String getVersion(){
+    if(params.RC) {
+        return "1.0";
+    } else {
+        return "0.1.2";
     }
 }
 
