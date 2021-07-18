@@ -7,23 +7,23 @@ pipeline {
     stages {
         stage('Verify') {
             steps {
-                sh '''
+                bat '''
                   dotnet --list-sdks
                   dotnet --list-runtimes
                 '''
-                sh 'printenv'
-                sh 'ls -l "$WORKSPACE"'
+                bat 'printenv'
+                bat 'ls -l "$WORKSPACE"'
             }
         }
         stage('Build') {
             steps {
-                sh 'dotnet build "$WORKSPACE/m4/src/Pi.Web/Pi.Web.csproj"'
+                bat 'dotnet build "$WORKSPACE/m4/src/Pi.Web/Pi.Web.csproj"'
             }
         }
         stage('Unit Test') {
             steps {
               dir("$WORKSPACE/m4/src") {
-                sh '''
+                bat '''
                     dotnet test Pi.Math.Tests/Pi.Math.Tests.csproj
                     dotnet test Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
                 '''
@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Smoke Test') {
             steps {
-              sh 'dotnet "$WORKSPACE/m4/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll"'
+              bat 'dotnet "$WORKSPACE/m4/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll"'
             }
         }
     }
